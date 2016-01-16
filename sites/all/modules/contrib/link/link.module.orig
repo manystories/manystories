@@ -475,19 +475,6 @@ function _link_validate(&$item, $delta, $field, $entity, $instance, $langcode, &
  *   The entity containing this link.
  */
 function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {
-  // As this function can be called multiple times and the item is changed by
-  // reference we need to ensure that there's always the original data to
-  // process otherwise processed data are processed again which might leads to
-  // unexpected results.
-  if (!isset($item['_link_sanitize_raw'])) {
-    // Store copy of original data to use in case of a second call.
-    $item['_link_sanitize_raw'] = $item;
-  }
-  else {
-    // Restore original data to process.
-    $item = $item['_link_sanitize_raw'];
-  }
-
   // Don't try to process empty links.
   if (empty($item['url']) && empty($item['title'])) {
     return;
@@ -528,13 +515,13 @@ function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {
   $url_parts = _link_parse_url($url);
 
   if (!empty($url_parts['url'])) {
-    $item = array(
-      'url' => $url_parts['url'],
-      'query' => isset($url_parts['query']) ? $url_parts['query'] : NULL,
+    $item['url'] = url($url_parts['url'],
+      array('query' => isset($url_parts['query']) ? $url_parts['query'] : NULL,
       'fragment' => isset($url_parts['fragment']) ? $url_parts['fragment'] : NULL,
       'absolute' => !empty($instance['settings']['absolute_url']),
       'html' => TRUE,
-    ) + $item;
+      )
+    );
   }
 
   // Create a shortened URL for display.
@@ -1496,7 +1483,6 @@ function link_field_item_property_info() {
     'type' => 'uri',
     'label' => t('The URL of the link.'),
     'setter callback' => 'entity_property_verbatim_set',
-    'getter callback' => 'link_url_property_get',
   );
   $properties['attributes'] = array(
     'type' => 'struct',
@@ -1512,13 +1498,6 @@ function link_field_item_property_info() {
  */
 function link_attribute_property_get($data, array $options, $name, $type, $info) {
   return isset($data[$name]) ? array_filter($data[$name]) : array();
-}
-
-/**
- * Entity property info getter callback for link url.
- */
-function link_url_property_get($data, array $options, $name, $type, $info) {
-  return (isset($data['url'])) ? url($data['url'], $data) : '';
 }
 
 /**

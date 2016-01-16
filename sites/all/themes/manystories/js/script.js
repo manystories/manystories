@@ -93,6 +93,7 @@ var Drupal = Drupal || {};
             search_input = $('#edit-search'),
             search_form = $('#views-exposed-form-all-stories-page .views-exposed-form', context),
             stories_link = $(".block-views-count-stories-block .view-header a"),
+            page_links = $(".node-page a", context),
             random_url = $(".block-views-count-stories-block .views-row a").attr('href');
 
         var icon_open_story = $(".icon-open-story"),
@@ -108,6 +109,16 @@ var Drupal = Drupal || {};
 
         // Add current language to /stories link
         stories_link.attr('href', lang_prefix + "/stories");
+
+        // Add language prefix for every link
+        page_links.each(function(){
+          var $el = $(this),
+              $href = $el.attr('href'),
+              $external = ($href.match(/(^http:\/\/)|(^www)/) != null);
+          if (!$external) {
+            $el.attr('href', lang_prefix + $href);
+          }
+        });
 
         icon_random.click(function(){
           window.location.href = random_url;
