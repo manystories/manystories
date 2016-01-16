@@ -1,0 +1,205 @@
+// Functions
+@function percent($target, $container) {
+  //@return ($target / $container) * 1400px;
+  @return ($target / $container) * 100%;
+}
+
+@function black-opacity($opacity) {
+  @return rgba(black, $opacity);
+}
+
+@function white-opacity($opacity) {
+  @return rgba(white, $opacity);
+}
+
+@function clean-height($height) {
+  @return calc(100% - #{$height});
+}
+
+// Mixins
+@mixin item-border() {
+  border-bottom: 10px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 0;
+}
+
+@mixin input-text {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  border-radius: 3px;
+  @include box-shadow(0 0 10px 0);
+  max-width: 500px;
+}
+
+@mixin responsive-img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+  width: auto \9; /* Old IE */
+}
+
+@mixin img-in-flexbox {
+  img {
+    @include responsive-img;
+    width: 100%;
+  }
+}
+
+@mixin full-width {
+  width: 100%;
+  left: 0;
+  clear: both;
+  display: block;
+}
+
+@mixin social-icon ($icon) {
+  background: url(../images/#{$icon}) no-repeat center center;
+  width: 24px;
+  height: 24px;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  padding: 0 !important;
+  //margin: 40px 0;
+}
+
+@mixin button-style {
+  color: #000;
+  padding: 0.5em;
+  text-transform: uppercase;
+  min-width: 150px;
+  display: inline-block;
+  @include transition(background 1s);
+  background: white-opacity(1);
+  margin-top: 2em;
+  text-align: center;
+  border: none;
+  &:hover,
+  &:focus {
+    background: black-opacity(0.6);
+    color: #fff;
+  }
+}
+
+@mixin absolute-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+  background-color: black-opacity(0.2);
+  margin-top: 0;
+  z-index: 4;
+  a {
+    color: #fff;
+  }
+}
+
+@mixin flexbox-views ($width, $parent, $child, $nth-child:"", $nth-width:"") {
+  #{$parent} {
+    @include display-flex;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+  }
+  #{$parent} #{$child} {
+    @include inline-block;
+    @include flex(1 $width);
+
+    width: $width;
+    max-width: $width;
+    margin: 0;
+    padding: 0;
+    @if $nth-child != '' {
+      &:nth-child(#{$nth-child}) {
+        width: $nth-width;
+        @include flex(1 $nth-width);
+      }
+    }
+    img {
+      @include img-in-flexbox;
+    }
+  }
+}
+
+/* Classes */
+
+%clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* Basic overrides */
+
+li.expanded,
+li.collapsed,
+li.leaf {
+  padding: 0;
+  margin: 0;
+}
+
+ul.menu li {
+  margin: 0;
+}
+
+/* OffCanvas menu */
+.js-overlay {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  cursor: pointer;
+  @include opacity(0.6);
+  z-index: 90;
+}
+
+div.js-offcanvas-icon {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  cursor: pointer;
+
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #fff 0px, #fff 15px, $link_color 15px, $link_color 18px, #fff 18px, #fff 23px, $link_color 23px, $link_color 26px, #fff 26px, #fff 31px, $link_color 31px, $link_color 34px, #fff 34px, #fff 50px);
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 15px;
+    height: 50px;
+    background: #fff;
+    box-shadow: 35px 0 0 #fff;
+  }
+}
+
+div.offcanvas {
+  @include transition(all 0.5s ease-out);
+  position: absolute;
+  margin-left: -100%;
+  z-index: 95;
+}
+
+.js-offcanvas-active {
+  .js-overlay {
+    display: block;
+  }
+  .offcanvas {
+    margin-left: 0;
+    width: 90%;
+  }
+}

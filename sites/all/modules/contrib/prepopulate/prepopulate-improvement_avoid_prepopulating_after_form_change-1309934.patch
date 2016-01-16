@@ -1,0 +1,13 @@
+diff --git a/prepopulate.module b/prepopulate.module
+index 105283b..28abc78 100644
+--- a/prepopulate.module
++++ b/prepopulate.module
+@@ -26,7 +26,7 @@ function prepopulate_help($path, $arg) {
+ function prepopulate_form_alter(&$form, $form_state, $form_id) {
+   // If this is a subsequent step of a multi-step form, the prepopulate values
+   // have done their work, and the user may have modified them: bail.
+-  if (!empty($form_state['rebuild'])) {
++  if (!empty($form_state['rebuild']) || !empty($form_state['input'])) {
+     return;
+   }
+   // Provide for accepting base64 encoded fields.

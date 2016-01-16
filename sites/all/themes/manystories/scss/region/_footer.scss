@@ -1,0 +1,45 @@
+.region-wrapper-footer {
+  position: fixed;
+  bottom: 0;
+  background: $footer_bg;
+  height: $bottom_height;
+  color: $footer_color;
+  border-top: 1px solid #1e1d1d;
+  @include full-width;
+  z-index: 10;
+}
+
+.region-footer {
+  max-width: $max-width;
+  margin: 0 auto;
+  .menu {
+    @include inline-block-list;
+  }
+  .leaf {
+    margin: 0 14px 0 0;
+    text-transform: uppercase;
+  }
+  a,
+  a.active,
+  a.hover,
+  a.focus,
+  a:active {
+    color: $footer_color;
+  }
+}
+
+
+#block-menu-menu-bottom {
+  @include add-gutter(1em);
+  @include grid-span(6, 1);
+  padding-top: 1em;
+  display: none;
+}
+
+
+#block-block-1{
+  @include add-gutter(1em);
+  //@include grid-span(6, 7);
+  @include grid-span(12, 1);
+  text-align: right;
+}

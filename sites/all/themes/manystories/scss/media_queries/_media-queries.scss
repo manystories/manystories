@@ -1,0 +1,224 @@
+@media (min-width: $screen-lg) {
+  #block-menu-menu-social {
+    margin-top: 40px;
+  }
+}
+@media (max-width: $screen-lg) {
+  .region-wrapper-navigation {
+    height: 115px;
+    .leaf a {
+      padding: 25px 0 4px 0;
+    }
+  }
+  #block-blockify-blockify-logo {
+    text-align: center;
+    float: none;
+    padding-top: 0;
+    @include grid-span(12, 1);
+  }
+  #block-system-main-menu {
+    @include grid-span(9, 1);
+    padding-left: 1em;
+    clear: both;
+  }
+  .main-wrapper {
+    margin-top: 115px;
+  }
+  .sidebar {
+    position: fixed;
+    top: 115px;
+    height: calc(100% - 150px);
+    font-size: 1em;
+  }
+}
+
+@media (max-width: $screen-md) {
+  .size-one-third,
+  .size-two-third,
+  .size-three-third,
+  .size-half {
+    width: 100%;
+    clear: both;
+    float: none;
+    margin: 0;
+  }
+  .height-full,
+  .height-double,
+  .height-half {
+    height: auto;
+  }
+}
+
+@media (max-width: $screen-sm) {
+  .view-products {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+  .view-products .views-row:nth-child(3n+1) {
+    width: 100%;
+  }
+
+  .view-related-from-brand,
+  .view-related-other-brand {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+
+  .view-editors-picks {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+
+  .view-best-sellers {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+
+  .view-taxonomy-term {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+
+  .view-brand-products {
+    @include flexbox-views (100%, '.view-content', '.views-row');
+  }
+  .node-product,
+  .node-brand,
+  .node-news {
+    &.view-mode-homepage,
+    &.view-mode-teaser,
+    &.view-mode-full {
+      @include flex-direction(column);
+      .group-left,
+      .group-right,
+      .group-middle {
+        @include full-width;
+      }
+    }
+  }
+
+  .header-h1,
+  #page-title,
+  #block-views-related-blog-posts-block > h2 {
+    font-size: 2em;
+    letter-spacing: 0;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .sidebar {
+    @include grid-span(12, 1);
+    position: relative;
+    top: 0;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  .html .main.with-sidebar {
+    @include grid-span(12, 1);
+  }
+  .region-navigation .menu {
+    text-align: center !important;
+  }
+  .main-wrapper {
+    margin-top: 140px;
+  }
+  .region-wrapper-navigation {
+    height: 140px;
+    .leaf a {
+      padding: 10px 0 4px 0;
+    }
+  }
+  #block-system-main-menu {
+    @include grid-span(12, 1);
+    padding: 0 1em;
+    clear: both;
+    height: 40px;
+    text-align: center;
+  }
+  #block-menu-menu-social {
+    @include grid-span(12, 1);
+    margin-top: 0;
+  }
+}
+
+@media (min-width: $screen-xxs) {
+ div.js-offcanvas-icon {
+    display: none !important;
+  }
+  span.js-overlay {
+    display: none !important;
+  }
+  div.offcanvas {
+    margin-left: 0;
+    position: fixed;
+  }
+  .js-offcanvas-active {
+    span.js-overlay {
+      display: none !important;
+    }
+    div.offcanvas {
+      margin-left: 0;
+      position: fixed;
+    }
+  }
+}
+
+@media (max-width: $screen-xxs) {
+  .main-wrapper {
+    margin-top: 0px;
+  }
+  .region-wrapper-navigation {
+    height: auto;
+    position: relative;
+    .leaf a {
+      padding: 10px 0;
+    }
+  }
+  #block-system-main-menu {
+    height: auto;
+    border-bottom: 1px dashed #ddd;
+  }
+  #block-menu-menu-social {
+    .leaf li {
+      display: inline-block;
+    }
+  }
+
+  .region-navigation {
+    .menu {
+      li {
+        display: block;
+        a {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+    a {
+      color: $navigation_color;
+      font-weight: bold;
+    }
+    .leaf {
+      margin: 0 14px;
+      text-transform: uppercase;
+      a {
+        padding: 20px 4px;
+        display: block;
+        border-bottom: 3px solid transparent;
+        &.active-trail,
+        &:active,
+        &.active,
+        &:focus,
+        &:hover {
+          border-bottom: 3px solid transparent;
+          background: $site_red;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .sidebar ul ul,
+  .sidebar ul ol,
+  .sidebar ol ul,
+  .sidebar ol ol {
+    padding-left: 0;
+  }
+}
+

@@ -1,0 +1,17 @@
+Index: prepopulate.module
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/prepopulate/prepopulate.module,v
+retrieving revision 1.17
+diff -u -p -r1.17 prepopulate.module
+--- prepopulate.module	18 Aug 2010 22:20:07 -0000	1.17
++++ prepopulate.module	16 Nov 2010 10:03:46 -0000
+@@ -38,6 +38,9 @@ function prepopulate_form_alter(&$form, 
+  * An #after_build function to set the values prepopulated in the request.
+  */
+ function prepopulate_after_build($form, &$form_state) {
++  if ($form_state['submitted']) {
++    return $form;
++  }
+   if (isset($_REQUEST['pp'])) {
+     parse_str(base64_decode($_REQUEST['pp']), $_REQUEST);
+   }

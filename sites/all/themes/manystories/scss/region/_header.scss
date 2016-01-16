@@ -1,0 +1,95 @@
+.header-region {
+  @include transition(all 0.5s ease-out);
+  @extend %clearfix;
+  @include full-width;
+  font-size: 1.5em;
+  font-family: $cousine;
+  line-height: 150%;
+  //font-weight: 600;
+  //text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  background-color: $navigation_bg;
+  background-image: url(../images/arrow_down.png);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  //height: $header_height;
+  z-index: 40;
+  color: $navigation_color;
+  @include box-shadow(0 -14px 30px 5px #000);
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+.admin-menu .header-region {
+  top: 20px;
+}
+
+.admin-menu.js-opened-header .header-region,
+.js-opened-header .header-region {
+  top: 0 !important;
+  background-image: url(../images/arrow_up.png);
+}
+
+.js-close-action {
+  @include thumbnail;
+  z-index: 30;
+}
+
+.js-opened-header .js-close-action {
+  display: block;
+}
+
+.block-taxonomy-menu-block-1 {
+  @include grid-span(4, 1);
+  padding: 20px;
+  text-align: right;
+}
+
+.block-system-main-menu {
+  @include grid-span(4, 9);
+  padding: 20px;
+  text-align: left;
+}
+
+.block-blockify-blockify-logo {
+  @include grid-span(4, 5);
+  text-align: center;
+  position: relative;
+}
+
+.block-taxonomy-menu-block ul li,
+.menu li {
+  list-style-type: none;
+  @include float-left;
+  width: 50%;
+}
+
+.social-facebook {
+  @include social-icon('facebook.png');
+}
+
+.social-twitter {
+  @include social-icon('twitter.png');
+}
+
+.social-youtube {
+  @include social-icon('youtube.png');
+}
+
+.social-pinterest {
+  @include social-icon('pinterest.png');
+}
+
+.social-googleplus {
+  @include social-icon('googleplus.png');
+}
+
+@media (max-width: $breakpoint_3col) {
+  .block-taxonomy-menu-block ul li,
+  .menu li {
+    list-style-type: none;
+    float: none;
+    width: 100%;
+  }
+}

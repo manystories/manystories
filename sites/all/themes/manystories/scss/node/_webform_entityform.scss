@@ -1,0 +1,19 @@
+.entityform,
+.webform-client-form {
+  .form-textarea-wrapper,
+  .form-text {
+    @include input-text;
+  }
+  .description {
+    max-width: 500px;
+  }
+}
+
+.entityform .form-submit,
+.webform-submit {
+  @include button-style;
+}
+
+.grippie {
+  display: none;
+}

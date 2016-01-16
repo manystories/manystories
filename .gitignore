@@ -1,0 +1,37 @@
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
+sites/default
+
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
+
+# Ignore Drupal core files
+/includes
+/misc
+/modules
+/themes
+/profiles
+/scripts
+/index.php
+/web.config
+/authorize.php
+/install.php
+/xmlrpc.php
+/cron.php
+/update.php
+/*.txt
+
+.htaccess
+sites/example.sites.php
+
+# Ignore Translations
+sites/*/translations
+
+# Ignore .sass-cache, .idea, .sublime*, sftp-config.json etc
+/sftp-config.json
+/php.ini
+.sublime*
+sublime*
+.idea*
+*.sass-cache*

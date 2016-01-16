@@ -1,0 +1,61 @@
+// Singularity settings
+// Symmetric grid with fluid gutters, 1/2 gutter on each side of a column
+@include add-grid(12);
+@include add-gutter(1/4);
+@include add-gutter-style('split');
+
+
+// Bootstrap
+$screen-xxs: 610px;
+$screen-xs: 790px;
+$screen-sm: 840px;
+$screen-md: 1040px;
+$screen-lg: 1200px;
+
+// Colors
+//$body_bg: #440000;
+$body_bg: #5E5350;
+$header_bg: #fff;
+$title_bg: #fbfbfb;
+$header_link: #000;
+
+$navigation_bg: #fff;
+$sidebar_bg: #000;
+$footer_bg: #000;
+$brand_bg: $body_bg;
+$brand_bg_even: darken( $brand_bg, 10% );
+
+$text_color: #000;
+$navigation_color: #000;
+$footer_color: #fff;
+$link_color: #b9030f;
+$block_inner_color: #fff;
+$date_color: #bebebe;
+
+$site_red: #b9030f;
+$site_gray: #777;
+
+$facebook_color: #3b5998;
+$twitter_color: #1FAFD9;
+$pinterest_color: #CC2127;
+$googleplus_color: #DB4936;
+
+
+// Sizes
+$font_size: 14px;
+$header_height: 70px;
+$bottom_height: 50px;
+$button_height: 50px;
+$small_size: 12px;
+$max_width: 100%;
+
+$clean_height: $header_height + $bottom_height;
+
+// Typography
+
+$open_sans: 'Open Sans', sans-serif;
+$open_sans_condensed: 'Open Sans Condensed';
+$cousine: Cousine, monospace;
+$roboto_slab: 'Roboto Slab', serif;
+$play: Play, fantasy;
+$comfortaa: Comfortaa, sans-serif;
