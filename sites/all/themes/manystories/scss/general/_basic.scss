@@ -1,9 +1,12 @@
 /* Overrides */
+html {
+  height:100%;
+}
+
 html,
 body {
   margin:0;
   padding:0;
-  height:100%;
   box-sizing: border-box;
 }
 
@@ -14,11 +17,24 @@ body {
 body {
   font-family: $open_sans;
   font-weight: 300;
+  font-style: normal;
   background-color: $body_bg;
+  background-image: url(../images/canvas_small.png);
+  //background-image: url(../images/canvas.png);
+  background-repeat: no-repeat;
+  background-position: right 10px bottom 80px;
+  background-attachment: fixed;
+  //background-size: cover;
   font-size: $font_size;
-  margin: 0;
-  padding: 0;
   -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: $breakpoint_1col) {
+  body {
+    background-position: center bottom 50px;
+  }
 }
 
 body.cke_editable {
@@ -50,7 +66,11 @@ ul, ol {
   list-style-position: inside;
 }
 
-.item-list ul {
+li.expanded,
+li.collapsed,
+li.leaf,
+.item-list ul,
+ul.menu li {
   margin: 0;
   padding: 0;
 }
@@ -89,6 +109,20 @@ ul, ol {
   }
 }
 
+table {
+  width: 100%;
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+  td,
+  th {
+    padding: 4px;
+  }
+  th {
+    font-weight: bold;
+  }
+}
+
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -103,44 +137,134 @@ ul, ol {
   font-weight: 600;
 }
 
-// Breadcrumbs
-.breadcrumb {
-  padding: 0;
-  margin-bottom: 20px;
-  list-style: none;
-  background-color: transparent;
-  font-size: 12px;
+.element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); // IE6, IE7
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
-.breadcrumb > li + li:before {
-  content: "> ";
-  padding: 0 5px;
-  color: #CCC;
+// Buttons
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  @include button-style;
 }
 
-#backtotop {
-  z-index: 100;
+// Page layout
+.page {
+  margin-bottom: $bottom_height;
+  margin-top: $bottom_height;
+  padding: 0 10px;
+}
+
+.node-type-story,
+.page-node-add-story,
+.page-node-edit,
+.page-stories {
+  .page {
+    margin-top: 0;
+    padding: 0;
+  }
 }
 
 /* Images */
 
 img {
   @include responsive-img;
-  //box-sizing: content-box;
+}
+
+/* Forms */
+*:focus {
+  outline: none;
+  @include box-shadow(none);
+}
+
+.description {
+  font-size: 0.8em;
+  margin: 4px 0;
+  clear: both;
+  line-height: 130%;
+  border-left: 3px solid #ddd;
+  padding-left: 6px;
+}
+
+fieldset {
+  border: 0;
+  margin: 10px 0;
+  padding: 0;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Messages */
+div.messages {
+  position: relative;
+  max-width: 400px;
+  margin: 10% auto;
+  border-radius: 3px;
+  border: 1px solid $logo_blue;
+  background: #fff;
+  padding: 10px;
+  line-height: 150%;
+  font-size: 1.2em;
+}
+
+.form-item {
+  div.messages {
+    max-width: initial;
+    margin: initial;
+    border-radius: 0;
+    border: 0;
+    background: none;
+    padding: initial;
+  }
+}
+
+.drupal-messages {
+  //cursor: pointer;
+}
+
+.js-active-message {
+  .drupal-messages {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black-opacity(0.5);
+    top: 0;
+    left: 0;
+    z-index: 300;
+    display: block !important;
+  }
+}
+
+.js-icon-close-messages {
+  @extend .js-icon-close-search;
 }
 
 /* Maintenance page */
+.page-404,
 .maintenance-page {
-  background: #CCC;
-  #page {
-    text-align: center;
+  background: #fff;
+  text-align: center;
+  h2 {
+    font-family: $cousine;
+    font-style: normal;
+    font-weight: 400;
   }
-  #page-title {
-    font-size: 30px;
+  a[rel="home"] img {
+    @extend %heartbeat;
   }
-  > div {
-    padding-bottom: 20px;
-  }
+}
+
+.go-home {
+  @include button-style;
+  margin: 0 auto;
 }
 
 /* Flexslider */
@@ -181,13 +305,18 @@ img {
 
 /* Labels */
 
-form label {
+form labelNOT {
   display: block;
   font-weight: 300;
   background: black-opacity(0.2);
   padding: 6px;
   text-transform: uppercase;
   max-width: 300px;
+}
+
+.marker,
+.form-required {
+  color: inherit;
 }
 
 /* Views */
@@ -225,16 +354,47 @@ form label {
   }
 }
 
-#page-title {
-  @extend .header-h1;
-  background: #000;
+/* Loading effects */
+.page-loader {
+  position: fixed;
+  //background: url(../images/logo_animated.gif) no-repeat center 30% #fff;
+  background: url(../images/logo_animated_fast.gif) no-repeat center 30% #fff;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 300;
 }
 
-/* Login page */
-.page-user {
-  background: #fff;
-  form label {
-    color: #fff;
-  }
-  padding: 0 2em;
+
+// EU cookies
+#sliding-popup.sliding-popup-bottom {
+  background: #FFF;
+  border-top: 1px solid #ddd;
+  padding: 20px;
 }
+
+#sliding-popup .popup-content #popup-text h2,
+#sliding-popup .popup-content #popup-text p {
+  color: $logo_blue !important;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0;
+}
+
+#sliding-popup .popup-content #popup-buttons {
+  button {
+    @include button-style;
+    text-shadow: none;
+    border-radius: 0;
+    margin-top: 1em;
+    &.find-more-button {
+      background: none;
+      color: #000;
+      text-transform: initial;
+      font-weight: normal;
+    }
+  }
+}
+

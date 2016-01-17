@@ -1,5 +1,6 @@
 .node-story {
   @include white-card;
+  background: rgba(255, 255, 255, 0.9);
   @include transition(all 1s ease-out);
   .field {
     margin-bottom: 1em;
@@ -21,7 +22,8 @@
     display: block;
     width: 100%;
     font-family: $cousine;
-    font-weight: normal;
+    font-weight: 400;
+    font-style: normal;
     font-size: 1.4em;
     border-bottom: 1px solid #000;
   }
@@ -72,6 +74,8 @@
     text-transform: lowercase;
     font-family: $cousine;
     width: 100%;
+    font-style: normal;
+    font-weight: 400;
   }
   .field-name-call-to-action {
     position: relative;
@@ -112,6 +116,11 @@
     margin: 0 auto;
   }
 }
+
+.embedly-card {
+  margin-top: -30px;
+}
+
 // Date field
 .container-inline-date .form-item,
 .container-inline-date .form-item input {
@@ -229,10 +238,6 @@
 
 .story-corner .js-close-story {
   display: none;
-}
-
-.icon-add-story {
-  //background-color: $logo_magenta;
 }
 
 .icon-close-story,
@@ -365,10 +370,12 @@ label[for="edit-field-see-more-link-und-0-url"] {
 
 // Tabs
 .page-taxonomy-term,
+.page-user,
 .page-node {
   nav.tabs {
     position: fixed;
     top: 34%;
+    left: 0;
     background: #fff;
     z-index: 40;
     padding: 2px;
@@ -401,6 +408,7 @@ label[for="edit-field-see-more-link-und-0-url"] {
   padding: 0 6px;
   cursor: pointer;
   line-height: 35px;
+  margin: 0 2px 0 0;
 }
 
 // Related Views
@@ -410,7 +418,7 @@ label[for="edit-field-see-more-link-und-0-url"] {
 .view-taxonomy-term,
 .view-all-stories {
   .views-row {
-    background: #fff;
+    //background: #fff;
   }
   h3 {
     word-wrap: break-word;
@@ -458,7 +466,8 @@ label[for="edit-field-see-more-link-und-0-url"] {
       font-size: 2em;
     }
     .field-name-field-story-texts {
-      max-height: auto;
+      max-height: initial;
+      min-height: initial;
     }
   }
 
