@@ -61,15 +61,6 @@ function manystories_html_head_alter(&$head_elements) {
   unset($head_elements['my_meta']);
 }
 
-/**
- * Implements hook_menu_alter()
- */
-function manystories_menu_alter(&$items) {
-  global $user;
-  if ($user->uid != '1') {
-    $items['admin/config/people']['access callback'] = FALSE;
-  }
-}
 
 /**
  * Alter button theming.
