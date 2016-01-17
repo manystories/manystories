@@ -116,7 +116,7 @@ function google_fonts_api_preprocess_html(&$vars) {
           $base = 'https://fonts.googleapis.com/css?family=';
         } // if
 
-        $url = $base . implode('|', $families) . '&subset=' . implode(',', $all_subsets);
+        $url = $base . implode('%7C', $families) . '&subset=' . implode(',', $all_subsets);
 
         fontyourface_add_css_in_preprocess($vars, $url, 'remote');
 

@@ -15,13 +15,11 @@ var Drupal = Drupal || {};
 
       // Add lang prefix for links etc
       var lang_prefix = "";
-      var html_lang = $('html').attr('lang');
+      var lang_xml = "";
+      var html_lang = lang_xml = $('html').attr('lang');
       if (typeof html_lang !== 'undefined' && html_lang !=  'en') {
         lang_prefix = "/" + html_lang;
       }
-
-      // Remove this pager to avoid coflicts with js pager
-      //$(".view-count-stories .item-list-pager").remove();
 
       // Bottom icon functionality
       $(".icon-home, .icon-add-story, .icon-user", context).click(function(){
@@ -93,7 +91,7 @@ var Drupal = Drupal || {};
             search_input = $('#edit-search'),
             search_form = $('#views-exposed-form-all-stories-page .views-exposed-form', context),
             stories_link = $(".block-views-count-stories-block .view-header a"),
-            page_links = $(".node-page a", context),
+            page_links = $(".field-name-body a, .field-name-field-buttons a"),
             random_url = $(".block-views-count-stories-block .views-row a").attr('href');
 
         var icon_open_story = $(".icon-open-story"),
@@ -113,10 +111,10 @@ var Drupal = Drupal || {};
         // Add language prefix for every link
         page_links.each(function(){
           var $el = $(this),
-              $href = $el.attr('href'),
-              $external = ($href.match(/(^http:\/\/)|(^www)/) != null);
-          if (!$external) {
-            $el.attr('href', lang_prefix + $href);
+              $href = $el.attr('href');
+          if (!($href.match(/(^http:\/\/)|(^https:)/) != null)) {
+            var $new = $href.replace(lang_prefix+lang_prefix, "");
+            $el.attr('href', lang_prefix + $new);
           }
         });
 
@@ -285,11 +283,6 @@ var Drupal = Drupal || {};
         // Consider also the same for resize
       //$(window).once().trigger('resize');
 
-      // Dynamic image resize
-      $(".field-name-field-media .field-item > img").click(function(){
-        $(this).toggleClass("js-img-initial");
-      });
-
       // CounTo plugin
       $(".count-years", context).countTo({
         from: 0,
@@ -298,9 +291,6 @@ var Drupal = Drupal || {};
         refreshInterval: 50,
       });
 
-      // Add label for select
-      $("#lang-dropdown-select-language", context)
-        .before("<label class='js-select-language-label' for='lang-dropdown-select-language'>Select language</label>");
     }
   };
 

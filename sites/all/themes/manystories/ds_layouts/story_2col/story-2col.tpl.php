@@ -1,4 +1,10 @@
-<<?php print $layout_wrapper; print $layout_attributes; ?> <?php if ($classes){ print 'class="'. $classes .'"';} ?>>
+<?php
+if ($teaser) {
+  $attributes = "";
+}
+?>
+
+<<?php print $layout_wrapper; print $layout_attributes; ?> class="<?php print $classes; ?>" <?php print $attributes; ?>>
 
   <?php if (isset($title_suffix['contextual_links'])): ?>
   <?php print render($title_suffix['contextual_links']); ?>

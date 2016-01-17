@@ -14,7 +14,7 @@
 <?php if(theme_get_setting('mothership_viewport')){  ?><meta name="viewport" content="width=device-width, initial-scale=1"><?php } ?>
 <?php if(theme_get_setting('mothership_viewport_maximumscale')){  ?><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"><?php } ?>
 <!--[if (IEMobile)]><meta http-equiv="cleartype" content="on"><![endif]-->
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
 <?php print $styles; ?>
 <?php if(theme_get_setting('mothership_respondjs')) { ?>
 <!--[if lt IE 9]>

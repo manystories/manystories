@@ -44,7 +44,7 @@ function manystories_preprocess_html(&$variables) {
   $touchicon .= '<link rel="icon" type="image/png" href="'.$path.'/android-chrome-192x192.png" sizes="192x192">' . "\n";
   $touchicon .= '<link rel="icon" type="image/png" href="'.$path.'/favicon-16x16.png" sizes="16x16">' . "\n";
   $touchicon .= '<link rel="manifest" href="'.$path.'/manifest.json">' . "\n";
-  $touchicon .= '<link rel="mask-icon" href="'.$path.'/safari-pinned-tab.svg" color="#5bbad5">' . "\n";
+  $touchicon .= '<link rel="mask-icon" href="'.$path.'/safari-pinned-tab.svg">' . "\n";
   $touchicon .= '<meta name="msapplication-TileColor" content="#ffffff">' . "\n";
   $touchicon .= '<meta name="msapplication-TileImage" content="'.$path.'/mstile-144x144.png">' . "\n";
   $touchicon .= '<meta name="msapplication-config" content="'.$path.'/browserconfig.xml">' . "\n";
@@ -69,4 +69,64 @@ function manystories_menu_alter(&$items) {
   if ($user->uid != '1') {
     $items['admin/config/people']['access callback'] = FALSE;
   }
+}
+
+/**
+ * Alter button theming.
+ * Used to remove name attribute when its empty.
+ */
+function manystories_button($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'submit';
+  $attributes = array('id', 'value');
+  if (!empty($element['#name'])) {
+    $attributes[] = 'name';
+  }
+  element_set_attributes($element, $attributes);
+
+  $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
+
+  if (!empty($element['#attributes']['disabled'])) {
+    $element['#attributes']['class'][] = 'form-button-disabled';
+  }
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/**
+ * Returns the rendered page title.
+ *
+ * @ingroup themeable
+ */
+function manystories_blockify_page_title($variables) {
+  if ($variables['page_title'] !== '') {
+    $title_attributes_array = array(
+      'class' => array('h1'),
+//      'id' => array('page-title'),
+    );
+    $title_attributes = drupal_attributes($title_attributes_array);
+
+    return '<div' . $title_attributes . '>' . $variables['page_title'] . '</div>';
+  }
+}
+
+/**
+ * Alter username display to add missing attributes
+ */
+function manystories_preprocess_username(&$variables) {
+  //dpm($variables);
+
+  global $language;
+  $langcode = $language->language;
+
+  $variables['attributes_array']['xml:lang'] = $langcode;
+  $variables['attributes_array']['lang'] = $langcode;
+}
+
+function manystories_form_lang_dropdown_form_alter(&$form, $form_state, $form_id) {
+  //dpm($form);
+  unset($form['submit']);
+  $form['lang_dropdown_select']['#id'] = 'lang-dropdown-select-language';
+  $form['lang_dropdown_select']['#title'] = t("Select a language");
+  $form['lang_dropdown_select']['#title_display'] = 'invisible';
 }
