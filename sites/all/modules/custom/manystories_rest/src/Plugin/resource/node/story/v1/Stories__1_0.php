@@ -28,7 +28,12 @@ use Drupal\restful\Plugin\resource\ResourceNode;
  *     "bundles": {
  *       "story"
  *     },
- *     "idField" = "universal_id"
+ *     "sort": {
+ *       "publish_date": "DESC",
+ *       "label": "ASC"
+ *     },
+ *     "range": 20,
+ *     "idField": "universal_id",
  *   },
  *   allowOrigin = "*",
  *   formatter = "json_api",

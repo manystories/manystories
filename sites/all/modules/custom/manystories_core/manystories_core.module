@@ -122,3 +122,28 @@ function manystories_core_form_hybridauth_additional_info_form_alter(&$form, &$f
     '#required' => TRUE,
   );
 }
+
+/**
+ * Returns the Embed.ly iframe of a normal iframe from a url
+ * @param  string $url The link of the resource
+ * @param  string $key The embed.ly api key
+ * @return mixed Markup
+ */
+function _manystories_core_embedly_iframe($url, $key){
+  $api_url = "http://api.embed.ly/1/extract?key=" . $key . "&url=".$url."&format=json";
+
+  $json = file_get_contents($api_url);
+  $embedly = json_decode($json, TRUE);
+
+  $http = drupal_http_request($url);
+  $xframe = $http->headers['x-frame-options'];
+
+  // If the link is embeded it has a non empty ['media'] value
+  // If the link does not allow for iframe usage
+  if (array_filter($embedly['media']) || isset($xframe)) {
+
+  return '<a title="embeded media" class="embedly-card" data-card-key="'. $key . '" data-card-recommend="0" data-card-chrome="0" data-card-controls="0" data-card-width="100%" href="' . $url . '"></a><script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>';
+  } else {
+  return '<iframe class="iframe" width="100%" src="' . $url . '"></iframe>';
+  }
+}

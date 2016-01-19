@@ -272,7 +272,10 @@ var Drupal = Drupal || {};
         var window_height = $(this).height(),
             header_height = $(".header-region").height(),
             region_two_up = $(".region-story-two-up"),
+            iframe = $('.iframe'),
             story_texts_height = $('.field-name-field-story-texts').height();
+        // Minimum height of the iframe
+        iframe.css('min-height', window_height);
 
         // For header consider also padding
         $('.header-region', context).css("top", -(header_height + 30));
