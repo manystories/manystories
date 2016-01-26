@@ -118,6 +118,7 @@ function geocoder_admin_settings_submit($form, &$form_state) {
   $geocoder_settings['geocoder_apikey_yahoo'] = trim($form_state['values']['geocoder_apikey_yahoo']);
   $geocoder_settings['geocoder_apikey_yandex'] = trim($form_state['values']['geocoder_apikey_yandex']);
   $geocoder_settings['geocoder_apikey_bing'] = trim($form_state['values']['geocoder_apikey_bing']);
+  $geocoder_settings['geocoder_region_google'] = trim($form_state['values']['geocoder_region_google']);
   $geocoder_settings['geocoder_apikey_google'] = trim($form_state['values']['geocoder_apikey_google']);
   variable_set("geocoder_settings", $geocoder_settings);
 }

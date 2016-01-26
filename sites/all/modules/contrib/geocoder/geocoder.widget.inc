@@ -433,6 +433,37 @@ function geocoder_widget_parse_addressfield($field_item) {
 }
 
 /**
+ * Geocoder Widget - Parse an Google Places JS
+ */
+function geocoder_widget_parse_google_places_js($field_item) {
+  $components = json_decode($field_item['address_components']);
+  foreach($components as $component) {
+    $types = $component->types;
+    if($types[0] == 'postal_code') {
+      $field_item['postal_code'] = $component->long_name;
+    }
+
+    if($types[0] == 'administrative_area_level_2') {
+      $field_item['administrative_area_level_2'] = $component->long_name;
+    }
+
+    if($types[0] == 'country') {
+      $field_item['country'] = $component->long_name;
+    }
+  }
+
+  $address = '';
+  if (!empty($field_item['vicinity']))                $address .= $field_item['vicinity'] . ',';
+  if (!empty($field_item['administrative_area_level_2'])) $address .= $field_item['administrative_area_level_2'] . ',';
+  if (!empty($field_item['country']))                 $address .= $field_item['country'] . ',';
+  if (!empty($field_item['postal_code']))             $address .= $field_item['postal_code'] . ',';
+
+  $address = rtrim($address, ', ');
+
+  return $address;
+}
+
+/**
  * Geocoder Widget - Parse a location field
  */
 function geocoder_widget_parse_locationfield($field_item) {
