@@ -1,1 +1,1 @@
-Please refer to the online documentation [http://manystories.readthedocs.org/en/latest/install/](http://manystories.readthedocs.org/en/latest/install/)
+In order to install this Drupal profile please refer to the online documentation [docs.manystoriesoneheart.gr/install/](http://docs.manystoriesoneheart.gr/install/).
