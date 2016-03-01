@@ -13,7 +13,7 @@ $plugin = array(
   'title' => t("Google Geocoder"),
   'description' => t('Geocodes via google geocoder'),
   'callback' => 'geocoder_google',
-  'field_types' => array('text', 'text_long', 'addressfield', 'location', 'text_with_summary', 'computed', 'taxonomy_term_reference', 'google_places_js_field'),
+  'field_types' => array('text', 'text_long', 'addressfield', 'location', 'text_with_summary', 'computed', 'taxonomy_term_reference'),
   'field_callback' => 'geocoder_google_field',
   'settings_callback' => 'geocoder_google_form',
   'terms_of_service' => 'http://code.google.com/apis/maps/documentation/geocoding/#Limits',
@@ -22,7 +22,7 @@ $plugin = array(
 /**
  * Process Markup
  */
-function geocoder_google($address, $options = array(), $components = array()) {
+function geocoder_google($address, $options = array()) {
   try {
     $delay_trigger = &drupal_static(__FUNCTION__);
     $delay = variable_get('geocoder_google_delay', 0);
@@ -32,10 +32,7 @@ function geocoder_google($address, $options = array(), $components = array()) {
 
     geophp_load();
 
-    $query = array(
-      'address' => $address,
-      'sensor' => 'false',
-    );
+    $query = array('address' => $address);
 
     if (isset($options['extra_query']) && is_array($options['extra_query'])) {
       $query += $options['extra_query'];
@@ -47,12 +44,6 @@ function geocoder_google($address, $options = array(), $components = array()) {
     }
     if (!empty($options['biasing']['region'])) {
       $query['region'] = $options['biasing']['region'];
-    }
-    else {
-      $geocoder_settings = variable_get("geocoder_settings", array());
-      if (isset($geocoder_settings['geocoder_region_google'])) {
-        $query['region'] = $geocoder_settings['geocoder_region_google'];
-      }
     }
     if (!empty($options['biasing']['components'])) {
       $query['components'] = $options['biasing']['components'];
@@ -195,8 +186,8 @@ function geocoder_google($address, $options = array(), $components = array()) {
 
     return $geometry;
   } catch (Exception $e) {
-    watchdog_exception('geocoder', $e, $e->getMessage(), array(), $e->getCode());
-    return FALSE;
+    // Just rethrow the exception, the geocoder widget handles it.
+    throw $e;
   }
 }
 
@@ -205,8 +196,8 @@ function geocoder_google_field($field, $field_item, $options = array()) {
     return geocoder_google($field_item['value'], $options);
   }
   if ($field['type'] == 'addressfield' && module_exists('addressfield') && !addressfield_field_is_empty($field_item, $field)) {
-    list($address, $components) = geocoder_google_parse_addressfield($field_item);
-    return geocoder_google($address, $options, $components);
+    $address = geocoder_widget_parse_addressfield($field_item);
+    return geocoder_google($address, $options);
   }
   if ($field['type'] == 'location') {
     $address = geocoder_widget_parse_locationfield($field_item);
@@ -215,10 +206,6 @@ function geocoder_google_field($field, $field_item, $options = array()) {
   if ($field['type'] == 'taxonomy_term_reference') {
     $term = taxonomy_term_load($field_item['tid']);
     return geocoder_google($term->name, $options);
-  }
-  if ($field['type'] == 'google_places_js_field') {
-    $address = geocoder_widget_parse_google_places_js($field_item);
-    return geocoder_google($address, $options);
   }
 }
 
@@ -285,35 +272,4 @@ function geocoder_google_form($default_values = array()) {
   );
 
   return $form;
-}
-
-function geocoder_google_parse_addressfield($field_item) {
-  $address = '';
-  $components = array();
-  if (!empty($field_item['premise'])) {
-    $address .= $field_item['premise'] . ',';
-  }
-  if (!empty($field_item['thoroughfare'])) {
-    $address .= $field_item['thoroughfare'] . ',';
-  }
-  if (!empty($field_item['locality'])) {
-    $components['locality'] = $field_item['locality'];
-  }
-  if (!empty($field_item['sub_administrative_area'])) {
-    $components['administrative_area'] = $field_item['sub_administrative_area'];
-    if (!empty($field_item['administrative_area'])) {
-      $address .= $field_item['administrative_area'] . ',';
-    }
-  }
-  else if (!empty($field_item['administrative_area'])) {
-    $components['administrative_area'] = $field_item['administrative_area'];
-  }
-  if (!empty($field_item['country'])) {
-    $components['country'] = $field_item['country'];
-  }
-  if (!empty($field_item['postal_code'])) {
-    $address .= $field_item['postal_code'] . ',';
-  }
-  $address = rtrim($address, ', ');
-  return array($address, $components);
 }

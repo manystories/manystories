@@ -103,6 +103,13 @@ function geocoder_admin_settings($form, &$form_state) {
     '#size' => 10,
   );
 
+  $form['geocoder_cache_empty_results'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Cache empty results'),
+    '#default_value' => variable_get('geocoder_cache_empty_results', TRUE),
+    '#description' => t('Geocoder caches all queries by default. Do you want that to include the ones with no results? If not, it will be checked every time, probably with the same no-result.'),
+  );
+
   $form['#submit'][] = 'geocoder_admin_settings_submit';
   return system_settings_form($form);
 }
@@ -118,7 +125,6 @@ function geocoder_admin_settings_submit($form, &$form_state) {
   $geocoder_settings['geocoder_apikey_yahoo'] = trim($form_state['values']['geocoder_apikey_yahoo']);
   $geocoder_settings['geocoder_apikey_yandex'] = trim($form_state['values']['geocoder_apikey_yandex']);
   $geocoder_settings['geocoder_apikey_bing'] = trim($form_state['values']['geocoder_apikey_bing']);
-  $geocoder_settings['geocoder_region_google'] = trim($form_state['values']['geocoder_region_google']);
   $geocoder_settings['geocoder_apikey_google'] = trim($form_state['values']['geocoder_apikey_google']);
   variable_set("geocoder_settings", $geocoder_settings);
 }
