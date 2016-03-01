@@ -29,6 +29,8 @@ function manystories_preprocess_html(&$variables) {
   }
 
   // Icons for mobile etc
+  $touchicon = "";
+  /**
   $touchicon = '<link rel="apple-touch-icon" sizes="57x57" href="'.$path.'/apple-touch-icon-57x57.png">' . "\n";
   $touchicon .= '<link rel="apple-touch-icon" sizes="60x60" href="'.$path.'/apple-touch-icon-60x60.png">' . "\n";
   $touchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="'.$path.'/apple-touch-icon-72x72.png">' . "\n";
@@ -49,7 +51,7 @@ function manystories_preprocess_html(&$variables) {
   $touchicon .= '<meta name="msapplication-TileImage" content="'.$path.'/mstile-144x144.png">' . "\n";
   $touchicon .= '<meta name="msapplication-config" content="'.$path.'/browserconfig.xml">' . "\n";
   $touchicon .= '<meta name="theme-color" content="#ffffff">' . "\n";
-
+  */
   $variables['appletouchicon'] = $touchicon;
 }
 

@@ -10,7 +10,7 @@
 
 <?php print $mothership_poorthemers_helper; ?>
 
-<span class="page-loader"></span>
+<span class="page-loaderNOT"></span>
 
 <header>
   <?php if($page['header']): ?>

@@ -10,7 +10,8 @@ body {
   &.page-stories,
   &.page-taxonomy-term {
     //background-image: url(../images/frontpage.jpg);
-    background-image: url(https://farm6.staticflickr.com/5165/5343849352_48530a370d_b.jpg);
+    //background-image: url(https://farm6.staticflickr.com/5165/5343849352_48530a370d_b.jpg);
+    background-image: url(http://static1.akpool.de/images/cards/33/332646.jpg);
     background-repeat: no-repeat;
     background-size:cover;
     background-position: top center;
@@ -102,6 +103,11 @@ body {
       font-size: 1.2em;
     }
   }
+}
+
+#logo,
+.front-logo {
+  @include opacity(0.3);
 }
 
 @media (max-width: $breakpoint_1col) {

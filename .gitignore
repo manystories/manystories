@@ -29,9 +29,10 @@ sites/example.sites.php
 sites/*/translations
 
 # Ignore .sass-cache, .idea, .sublime*, sftp-config.json etc
-/sftp-config.json
-/php.ini
+sftp-config.json
+php.ini
 .sublime*
 sublime*
 .idea*
 *.sass-cache*
+

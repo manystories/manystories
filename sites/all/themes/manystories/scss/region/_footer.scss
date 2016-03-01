@@ -148,7 +148,7 @@
     border-right: 0;
   }
   &.icon-home {
-    background-image: url(../images/icons/icon_logo.png);
+    background-image: url(../images/icons/icon_home.png);
   }
   &.icon-bookmarklet {
     background-image: url(../images/icons/icon_bookmarklet.png);
@@ -259,5 +259,29 @@
   .helpful-icon.icon-previous {
     left: -12px;
     background-position: right center;
+  }
+  .helpful-icon.icon-bookmarklet {
+    display: none;
+  }
+  .icon-menu,
+  .icon-search,
+  .icon-user,
+  .icon-random,
+  .icon-home,
+  .icon-add-story,
+  .icon-menu-footer,
+  .icon-bookmarklet,
+  .icon-open-story,
+  .icon-close-story {
+    background-image: none !important;
+    text-overflow: ellipsis;
+    text-transform: lowercase;
+    font-size: 0.9em;
+    word-wrap: inherit;
+    text-indent: initial;
+  }
+  span.icon-close-story,
+  span.icon-close-shortcuts {
+    background-image: url(../images/icons/icon_close.png) !important;
   }
 }
