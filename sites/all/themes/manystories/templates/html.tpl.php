@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <!--[if IE 7]>    <html class="no-js ie7 oldie" <?php print $rdf_namespaces; ?> <?php print $html_attributes; ?>> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" <?php print $rdf_namespaces; ?> <?php print $html_attributes; ?>> <![endif]-->
@@ -9,10 +9,12 @@
 <?php print $head; ?>
 <?php print $appletouchicon; ?>
 <?php if(theme_get_setting('mothership_mobile')){  ?>
-<meta name="MobileOptimized" content="width">
-<meta name="HandheldFriendly" content="true"><?php } ?>
-<?php if(theme_get_setting('mothership_viewport')){  ?><meta name="viewport" content="width=device-width, initial-scale=1"><?php } ?>
-<?php if(theme_get_setting('mothership_viewport_maximumscale')){  ?><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"><?php } ?>
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" /><?php } ?>
+<?php if(theme_get_setting('mothership_viewport')){  ?><meta name="viewport" content="width=device-width, initial-scale=1" /><?php } ?>
+<?php if(theme_get_setting('mothership_viewport_maximumscale')){  ?>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+<?php } ?>
 <!--[if (IEMobile)]><meta http-equiv="cleartype" content="on"><![endif]-->
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
 <?php print $styles; ?>
