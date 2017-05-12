@@ -7,6 +7,7 @@
 
 /**
  * Implements hook_rules_event_info().
+ *
  * @ingroup rules
  */
 function email_confirm_rules_event_info() {
@@ -17,7 +18,7 @@ function email_confirm_rules_event_info() {
       'variables' => array(
         'user' => array(
           'type' => 'user',
-          'label' => t('User object of the user requesting email change')
+          'label' => t('User object of the user requesting email change'),
         ),
         'old_email' => array(
           'type' => 'text',
@@ -36,7 +37,7 @@ function email_confirm_rules_event_info() {
       'variables' => array(
         'user' => array(
           'type' => 'user',
-          'label' => t('User object of the user confirming email change')
+          'label' => t('User object of the user confirming email change'),
         ),
         'old_email' => array(
           'type' => 'text',

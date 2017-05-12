@@ -2,11 +2,10 @@
 
 /**
  * @file
- * Install, update and uninstall functions for the Email Change Confirmation module.
+ * Install, update, & uninstall functions for Email Change Confirmation module.
  */
 
 /**
- * Implements hook_update_N().
  * Updates email confirmation text to use new token patterns.
  */
 function email_confirm_update_7000() {
@@ -40,4 +39,5 @@ function email_confirm_uninstall() {
   variable_del('email_confirm_confirmation_email_bcc');
   variable_del('email_confirm_confirmation_email_body');
   variable_del('email_confirm_confirmation_original_email_body');
+  variable_del('email_confirm_timeout');
 }

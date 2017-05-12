@@ -5,7 +5,7 @@
  * Input filter that enhances oEmbed enabled URLs with extra content
  */
 
-define('OEMBED_PATTERN_AUTOEMBED', '|^\s*(https?://[^\s"]+)\s*$|im');
+define('OEMBED_PATTERN_AUTOEMBED', '|^(\s*)(https?://[^\s"]+)(\s*)$|im');
 define('OEMBED_PATTERN_EMBED_SHORTCODE', '/(.?)\[embed\b(.*?)\](.+?)\[\/embed\](.?)/s');
 define('OEMBED_PATTERN_EMBED_UNWRAP', '/<p>\s*+(\[embed\b.*?\].+?\[\/embed\])\s*+<\/p>/s');
 
@@ -124,7 +124,7 @@ function oembed_preg_tag_replace($match) {
   global $_oembed_filter_settings;
 
   // allow [[oembed]] syntax for escaping a tag
-  if ($match[1] == '[' && $match[4] == ']') {
+  if ($match[1] === '[' && $match[4] === ']') {
     return substr($match[0], 1, -1);
   }
 
@@ -145,7 +145,7 @@ function oembed_preg_tag_replace($match) {
  * PREG replace callback finds URLs
  */
 function oembed_preg_auto_replace($match) {
-  return '[embed]'. $match[1] ."[/embed]\n";
+  return $match[1].'[embed]'. $match[2] .'[/embed]'.$match[3];
 }
 
 /**

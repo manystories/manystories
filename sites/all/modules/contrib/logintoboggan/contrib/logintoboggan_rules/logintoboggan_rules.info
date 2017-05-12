@@ -6,9 +6,9 @@ core = "7.x"
 dependencies[] = logintoboggan
 dependencies[] = rules
 
-; Information added by Drupal.org packaging script on 2015-06-04
-version = "7.x-1.5+7-dev"
+; Information added by Drupal.org packaging script on 2017-04-28
+version = "7.x-1.5+10-dev"
 core = "7.x"
 project = "logintoboggan"
-datestamp = "1433449682"
+datestamp = "1493392418"
 
