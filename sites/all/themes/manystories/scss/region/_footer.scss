@@ -12,6 +12,12 @@
   }
 }
 
+.admin-menu {
+  .region-footer {
+    margin-top: 20px;
+  }
+}
+
 .region-footer-left,
 .region-footer-right {
   @include inline-block;
