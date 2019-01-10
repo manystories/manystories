@@ -158,6 +158,10 @@ input[type="submit"] {
   padding: 0 10px;
 }
 
+.admin-menu .page {
+  margin-top: $bottom_height + 40px;
+}
+
 .node-type-story,
 .page-node-add-story,
 .page-node-edit,
