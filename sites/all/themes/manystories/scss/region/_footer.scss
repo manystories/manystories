@@ -1,12 +1,12 @@
 .region-footer {
+  @include full-width;
   position: fixed;
-  bottom: 0;
-  //padding: 14px;
+  top: 0;
+  overflow: hidden;
   background: $footer_bg;
   height: $bottom_height;
-  @include full-width;
+  border-bottom: 1px solid #ddd;
   z-index: 50;
-  @include box-shadow(0 14px 30px 5px #000);
   .block {
     @include inline-block;
   }
@@ -68,9 +68,6 @@
   }
   .views-row {
     display: none;
-    //@extend .helpful-icon;
-    //text-indent: 0 !important;
-    //background-image: url(../images/icons/icon_random.png);
     a {
       display: block;
       height: 100%;

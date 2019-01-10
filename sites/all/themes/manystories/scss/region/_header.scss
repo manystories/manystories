@@ -32,7 +32,7 @@
 
 .admin-menu.js-opened-header .header-region,
 .js-opened-header .header-region {
-  top: 0 !important;
+  top: $bottom_height !important;
   background-image: url(../images/arrow_up.png);
 }
 
